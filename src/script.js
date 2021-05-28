@@ -17,9 +17,9 @@ window.addEventListener('mousemove', (event) => {
 // Load Textures
 
 const loader = new THREE.TextureLoader()
-const height = loader.load('/img/Heightmap.png')
-const texture = loader.load('/img/texture.jpeg')
-const alpha = loader.load('/img/alpha.png')
+const height = loader.load('./img/Heightmap.png')
+const texture = loader.load('./img/texture.jpeg')
+const alpha = loader.load('./img/alpha.png')
 
 // Debug
 // const gui = new dat.GUI()
