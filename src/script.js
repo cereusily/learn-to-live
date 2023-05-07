@@ -6,8 +6,8 @@ import * as dat from 'dat.gui'
 const cursorSvg = document.getElementById("cursorsvg")
 
 window.addEventListener('mousemove', (event) => {
-    cursorSvg.style.top = event.clientY;
-    cursorSvg.style.left = event.clientX;
+    cursorSvg.style.top = event.clientY - 40;
+    cursorSvg.style.left = event.clientX - 45;
 
     // cursorSvg.style.top = (event.clientY / 16) - (45 - 16) + 'rem'
     // cursorSvg.style.left = (event.clientX / 16) - (45 - 16) + 'rem'
