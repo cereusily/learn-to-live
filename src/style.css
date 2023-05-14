@@ -1,26 +1,82 @@
-*
-{
+* {
     margin: 0;
     padding: 0;
 }
 
 html,
-body
-{
+body {
     height: 100vh;
-    font-family: 'Poppins';
     margin: 0;
     display: grid;
     place-items: center;
-    overflow: hidden;
 }
 
-.webgl
+header {
+    display: flex;
+    width: 95%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10%;
+}
+
+
+.navbar {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    font-family: 'Cabin', sans-serif;
+    list-style: none;
+    text-transform: uppercase;
+}
+
+.nav-links
 {
+    color: rgb(42, 42, 42);
+    font-size: 2rem;
+    text-decoration: none;
+    list-style: none;
+    padding: 10px;
+    margin: 10px;
+}
+
+.nav-links a {
+    transition: all 0.3s ease 0s;
+}
+
+.nav-link a:hover {
+    color:black;
+    font-size: 32px;
+}
+
+.webgl {
     position: fixed;
     top: 0;
     left: 0;
     outline: none;
+    z-index: -1;
+}
+
+.svg-section {
+    height: 115%;
+    z-index: -2;
+}
+
+.section {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Cabin', sans-serif;
+    color: #000000;
+    text-transform: uppercase;
+    font-size: 7vmin;
+    padding-left: 5%;
+    padding-right: 0%;
+}
+
+.section h1  {
+    padding-right: 5%;
 }
 
 .container {
@@ -43,7 +99,7 @@ p {
 }
 
 #backsvg {
-    width: 48em;
+    width: 64em;
     position: center;
     animation: rotation 200s infinite linear;
     pointer-events: none;
@@ -60,14 +116,16 @@ p {
 text {
     font-size: 2em;
     fill: rgb(0, 0, 0);
+    font-family: 'Cabin', sans-serif;
+    font-weight: bold;
 }
 
 .title-header {
-    font-family: 'Nanum Brush Script', cursive;
+    font-family: 'Cabin', sans-serif;
 }
 
 .title-subheader {
-    font-family: 'Nanum Brush Script', cursive;
+    font-family: 'Cabin', sans-serif;
 }
 
 .credits-container {
@@ -79,7 +137,8 @@ text {
 
 .credits {
     color: rgb(153, 153, 153);
-    font-family: 'Nanum Brush Script', cursive;
+    font-family: 'Cabin', sans-serif;
+    /* font-family: 'Nanum Brush Script', cursive; */
     font-size: 0.7em;
     width: 100%;
     flex: 0 0 160px;
@@ -93,3 +152,58 @@ text {
         transform: rotate(359deg);
     }
 }
+@media (min-width: 300px) {
+    p {
+        font-size: 0.75rem;
+        width: 20%;
+    }
+    #backsvg {
+        width: 32em;
+        position: center;
+        animation: rotation 200s infinite linear;
+        pointer-events: none;
+    }
+    .svg-section {
+        height: 115%;
+        width: 95%;
+        z-index: -2;
+    }
+}
+
+@media (min-width: 600px) {
+    p {
+        font-size: 0.75rem;
+        width: 20%;
+    }
+    #backsvg {
+        width: 52em;
+        position: center;
+        animation: rotation 200s infinite linear;
+        pointer-events: none;
+    }
+    .svg-section {
+        height: 115%;
+        width: 90%;
+        z-index: -2;
+    }
+}
+
+@media (min-width: 1000px) {
+    p {
+        font-size: 1.3rem;
+        width: 55%;
+        color: black;
+    }
+    #backsvg {
+        width: 64em;
+        position: center;
+        animation: rotation 200s infinite linear;
+        pointer-events: none;
+    }
+    .svg-section {
+        height: 115%;
+        width: 50%;
+        z-index: -2;
+    }
+}
+

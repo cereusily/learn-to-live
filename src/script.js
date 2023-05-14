@@ -2,20 +2,28 @@ import './style.css'
 import * as THREE from 'three'
 import * as dat from 'dat.gui'
 
-// <--- cursor --->
+
+/**
+ * Cursor
+ */
+const cursor = {}
+
+cursor.x = 0
+cursor.y = 0
+
 const cursorSvg = document.getElementById("cursorsvg")
 
-window.addEventListener('mousemove', (event) => {
+window.addEventListener('mousemove', (event) =>
+{
     cursorSvg.style.top = event.clientY - 40;
     cursorSvg.style.left = event.clientX - 45;
 
-    // cursorSvg.style.top = (event.clientY / 16) - (45 - 16) + 'rem'
-    // cursorSvg.style.left = (event.clientX / 16) - (45 - 16) + 'rem'
+    cursor.x = event.clientX / sizes.width - 0.5
+    cursor.y = event.clientY / sizes.height - 0.5
 })
 
 
 // Load Textures
-
 const loader = new THREE.TextureLoader()
 const height = loader.load('./img/Heightmap.png')
 const texture = loader.load('./img/texture.jpeg')
@@ -46,10 +54,14 @@ const material = new THREE.MeshStandardMaterial({
 
 
 // Mesh
-
+const objectsDistance = 1
 const plane = new THREE.Mesh(planeGeo, material)
 scene.add(plane)
+
 plane.rotation.x = 181
+plane.position.x -= 0.01;
+plane.position.y -= 0.50;
+plane.position.z = 1
 
 // gui.add(plane.rotation, 'x', 0, 360, 0.5)
 
@@ -89,11 +101,15 @@ window.addEventListener('resize', () =>
  * Camera
  */
 // Base camera
+// Group
+const cameraGroup = new THREE.Group()
+scene.add(cameraGroup)
+
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
 camera.position.x = 0
 camera.position.y = 0
 camera.position.z = 4
-scene.add(camera)
+cameraGroup.add(camera)
 
 // Controls
 // const controls = new OrbitControls(camera, canvas)
@@ -122,18 +138,25 @@ function animateTerrain(event) {
 }
 
 const clock = new THREE.Clock()
+let previousTime = 0
 
 const tick = () =>
 {
-
     const elapsedTime = clock.getElapsedTime()
+    const deltaTime = elapsedTime - previousTime
+    previousTime = elapsedTime
+
+    // Animate camera
+    camera.position.y = - scrollY / sizes.height * objectsDistance
+
+    const parallaxX = cursor.x * 0.5
+    const parallaxY = - cursor.y * 0.5
+    cameraGroup.position.x += (parallaxX - cameraGroup.position.x) * 5 * deltaTime
+    cameraGroup.position.y += (parallaxY - cameraGroup.position.y) * 5 * deltaTime
 
     // Update objects
-
     plane.rotation.z = .1 * elapsedTime
     plane.material.displacementScale = .3 + mouseY * 0.0001
-    // Update Orbital Controls
-    // controls.update()
 
     // Render
     renderer.render(scene, camera)
